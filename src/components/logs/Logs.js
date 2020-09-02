@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import LogItem from './LogItem';
+import Preloader from '../layout/Preloader';
 
 export const Logs = () => {
     //create our state
@@ -11,7 +13,7 @@ export const Logs = () => {
         //eslint-disable-next-line
     }, []);
 
-    const getLogs = async () =>{
+    const getLogs = async () => {
         setLoading(true);
         //no need for localhost:5000/logs, due to proxy
         const res = await fetch('/logs');
@@ -21,17 +23,17 @@ export const Logs = () => {
     }
 
     if(loading){
-        return <h4>Loading...</h4>
+        return <Preloader>Loading...</Preloader>
     }
 
     return (
-        <ul className="collection-with-header">
+        <ul className="collection with-header">
             <li className="collection-header">
                 <h4 className="center">System Logs</h4>
             </li>
             {!loading && logs.length === 0 ?
                 (<p className="center">No logs to show...</p>): 
-                logs.map(log => <li>{log.message}</li>)
+                logs.map(log => <LogItem log={log} key={log.id}/>)
             }
         </ul>
     )
