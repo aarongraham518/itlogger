@@ -3,7 +3,7 @@ import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
 
 export const Logs = () => {
-    //create our state
+    //create our state vars and functions
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,8 @@ export const Logs = () => {
             <li className="collection-header">
                 <h4 className="center">System Logs</h4>
             </li>
-            {!loading && logs.length === 0 ?
+            {  
+                !loading && logs.length === 0 ?
                 (<p className="center">No logs to show...</p>): 
                 logs.map(log => <LogItem log={log} key={log.id}/>)
             }
